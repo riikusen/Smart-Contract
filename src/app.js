@@ -14,6 +14,7 @@ App = {
         await App.render()
     },
 
+    
     // https://medium.com/metamask/https-medium-com-metamask-breaking-change-injecting-web3-7722797916a8
     loadWeb3: async () => {
         if (typeof web3 !== 'undefined') {
@@ -70,9 +71,14 @@ App = {
         // 加载智能合约
         const contract = await App.contracts.MyContract.deployed()
         App.contractInstance = contract
-
-        const value = await App.contractInstance.get()
+        console.log(contract);
+        const value = await contract.get()
+        console.log(await contract.getMobileNumber());
+        console.log(value);
+        // const mobileNumber = await contract.getMobileNumber()
+        console.log(mobileNumber);
         $('#value').html(value)
+        $('#mobileNumber').html(mobileNumber)
 
         App.setLoading(false)
     },
@@ -81,9 +87,11 @@ App = {
         App.setLoading(true)
 
         const newValue = $('#newValue').val()
+        const newMobileNumber = $('#newMobileNumber').val()
 
         await App.contractInstance.set(newValue, {from: App.account})
-        window.alert('更新成功，页面值不会马上更新，等待几秒后多刷新几次。')
+        // await App.contractInstance.setMobileNumber(newMobileNumber, {from: App.account})
+        window.alert('Successfully updated. Please refresh the page to view details.')
         App.setLoading(false)
     },
 
