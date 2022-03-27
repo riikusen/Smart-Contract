@@ -73,9 +73,9 @@ App = {
         App.contractInstance = contract
         console.log(contract);
         const value = await contract.get()
-        console.log(await contract.getMobileNumber());
+        const mobileNumber = await contract.getMobileNumber()
+        // const contractDetails = await contract.getDetails()
         console.log(value);
-        // const mobileNumber = await contract.getMobileNumber()
         console.log(mobileNumber);
         $('#value').html(value)
         $('#mobileNumber').html(mobileNumber)
@@ -90,7 +90,7 @@ App = {
         const newMobileNumber = $('#newMobileNumber').val()
 
         await App.contractInstance.set(newValue, {from: App.account})
-        // await App.contractInstance.setMobileNumber(newMobileNumber, {from: App.account})
+        await App.contractInstance.setMobileNumber(newMobileNumber, {from: App.account})
         window.alert('Successfully updated. Please refresh the page to view details.')
         App.setLoading(false)
     },

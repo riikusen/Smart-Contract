@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> DApp Demo</title>
+    <title> Landlord Page</title>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -14,116 +14,81 @@
     <![endif]-->
   </head>
   <body>
-      <h1>Account Number: <span id="account"></span></h1>
+      <h1>Landlord Page</h1>
+      <a href="index.html">Go to the tenant page</a>
+      <!-- <h1>Account Number: <span id="account"></span></h1> -->
       <hr>
       <div id="content">
-          <h2>Smart Contract：MyContract</b></h2>
+          <h2>Please fill the following details to start a rental contract.</b></h2>
+
+
+
           <p>Display the details: <span id="value"></span></p>
-
-            <!-- <h5>Setvalue值</h5>
-            <form onSubmit="App.set(); return false;" role="form">
-            <div >
-                <input id="newValue"  type="text"></input>
-            </div>
-            <button type="submit" >Set</button>
-            </form> -->
-
             <h5>Name</h5>
             <form onSubmit="App.set(); return false;" role="form">
             <div >
                 <input id="newValue"  type="text"></input>
-                <!-- <input id="newValue"  type="text"></input> -->
             </div>
             <button type="submit" >Set</button>
             </form>
 
 
-            <p>Display the details: <span id="mobileNumber"></span></p>
+            <!-- <p>Display the details: <span id="mobileNumber"></span></p>
             <h5>Mobile Number</h5>
+            <form onSubmit="App.setMobileNumber(); return false;" role="form">
+            <div >
+                <input id="newMobileNumber"  type="text"></input>
+            </div> -->
+            <!-- <button type="submit" >Set</button>
+            </form> -->
+            
+            
+            <p id="setContract">--- Contract Details: <span id="name"></span></p>
+            <p>Name: <span id="ownerName"></span></p>
+            <p>Mobile Number: <span id="mobileNumber"></span></p>
+            <p>Address: <span id="propertyAddress"></span></p>
+            <p>Weekly Rent: <span id="weeklyRent"></span></p>
+            <p>Deposit: <span id="deposit"></span></p>
+            <p>Start Date: <span id="startDate"></span></p>
+            <p>End Date: <span id="endDate"></span></p>
+            <p>Supplied Services: <span id="suppliedServices"></span></p>
+            <p>Pets Allowed: <span id="petsAllowed"></span></p>
+
+
+            <!-- tring out -->
+
+            <p id="setContract">--- Fill in Contract Details --- <span id="name"></span></p>
+            <form onSubmit="App.setDetails(); return false;" role="form"></form>
+            Name: <input type="text" name="lname" id="setOwnerName" value="JL"><BR>
+            Mobile Number: <input type="text" name="lname1" id="setMobileNumber" value="045333"><BR>
+            Property Address: <input type="text" name="lname2" id="setPropertyAddress" value="Brisbane"><BR>
+            Weekly Rent: <input type="text" name="lname3" id="setWeeklyRent" value="200"><BR>
+            Deposit: <input type="text" name="lname4" id="setDeposit" value="400"><BR>
+            Start Date (DD/MM/YYYY): <input type="text" name="lname5" id="setStartDate" value="020422"><BR>
+            End Date (DD/MM/YYYY): <input type="text" name="lname6" id="setEndDate" value="090823"><BR>
+            Supplied Services: <input type="text" name="lname7" id="setSuppliedSerivces" value="water"><BR>
+            Pets Allowed: <input type="text" name="lname7" id="setPetsAllowed" value="false"><BR>
+            
+
+            <input type="checkbox" id="myCheck">
+            <label for="myCheck">I hereby declare that the information provided is true and correct. I also understand that any willful dishonesty may render for refusal of this application or immediate termination of contract.</label>
+            <br><button type="submit">Sign the contract</button>
+            </form>
+            <p id="setVal">---</p>
+
+           
+
+
+            <!-- <h5>Payment Method</h5>
             <form onSubmit="App.set(); return false;" role="form">
             <div >
                 <input id="newValue"  type="text"></input>
-            </div>
-
-            <button type="submit" >Set</button>
-            </form>
-
-
-
-            <h5>Property Address</h5>
-            <form onSubmit="App.set(); return false;" role="form">
-            <div >
-                <input id="newValue"  type="text"></input>
-            </div>
-
-            <button type="submit" >Set</button>
-            </form>
-
-            <h5>Deposit</h5>
-            <form onSubmit="App.set(); return false;" role="form">
-            <div >
-                <input id="newValue"  type="text"></input>
-            </div>
-
-            <button type="submit" >Set</button>
-            </form>
-
-            <h5>Weekly Rent</h5>
-            <form onSubmit="App.set(); return false;" role="form">
-            <div >
-                <input id="newValue"  type="text"></input>
-            </div>
-
-            <button type="submit" >Set</button>
-            </form>
-
-            <h5>Start Date</h5>
-            <form onSubmit="App.set(); return false;" role="form">
-            <div >
-                <input id="newValue"  type="text"></input>
-            </div>
-
-            <button type="submit" >Set</button>
-            </form>
-
-            <h5>End Date</h5>
-            <form onSubmit="App.set(); return false;" role="form">
-            <div >
-                <input id="newValue"  type="text"></input>
-            </div>
-
-            <button type="submit" >Set</button>
-            </form>
-
-            <h5>Supplied Services</h5>
-            <form onSubmit="App.set(); return false;" role="form">
-            <div >
-                <input id="newValue"  type="text"></input>
-            </div>
-
-            <button type="submit" >Set</button>
-            </form>
-
-            <h5>Pets Allowed</h5>
-            <form onSubmit="App.set(); return false;" role="form">
-            <div >
-                <input id="newValue"  type="text"></input>
-            </div>
-
-            <button type="submit" >Set</button>
-            </form>
-
-            <h5>Payment Method</h5>
-            <form onSubmit="App.set(); return false;" role="form">
-            <div >
-                <input id="newValue"  type="text"></input>
-            </div>
-
-            <button type="submit" >Set</button>
-            </form>
+            </div> -->
+            <!-- <button type="submit" >Set</button>
+            </form> -->
 
       </div>
-      <div id="loader">Loading...</div>
+      <div id="loader">Refresh the page to view the contract details.</div>
 
 
     </div>
