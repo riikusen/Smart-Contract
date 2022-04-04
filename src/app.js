@@ -74,11 +74,13 @@ App = {
         console.log(contract);
         const value = await contract.get()
         const mobileNumber = await contract.getMobileNumber()
-        // const contractDetails = await contract.getDetails()
+        const ownerName = await contract.getOwnerName()
         console.log(value);
         console.log(mobileNumber);
+        console.log(ownerName);
         $('#value').html(value)
-        $('#mobileNumber').html(mobileNumber)
+        $('#ownerName').html(ownerName);
+        // $('#mobileNumber').html(mobileNumber)
 
         App.setLoading(false)
     },
@@ -88,9 +90,11 @@ App = {
 
         const newValue = $('#newValue').val()
         const newMobileNumber = $('#newMobileNumber').val()
+        const newOwnerName = $('#newOwnerName').val()
 
         await App.contractInstance.set(newValue, {from: App.account})
         await App.contractInstance.setMobileNumber(newMobileNumber, {from: App.account})
+        await App.contractInstance.setOwnerName(newOwnerName, {from: App.account})
         window.alert('Successfully updated. Please refresh the page to view details.')
         App.setLoading(false)
     },

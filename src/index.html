@@ -31,18 +31,27 @@
             </div>
             <button type="submit" >Set</button>
             </form>
+            
 
-
-            <!-- <p>Display the details: <span id="mobileNumber"></span></p>
+            <p>Display the details: <span id="mobileNumber"></span></p>
             <h5>Mobile Number</h5>
             <form onSubmit="App.setMobileNumber(); return false;" role="form">
             <div >
                 <input id="newMobileNumber"  type="text"></input>
-            </div> -->
-            <!-- <button type="submit" >Set</button>
-            </form> -->
-            
-            
+            </div>
+            <button type="submit" >Set</button>
+            </form>
+
+            <p>Display the details: <span id="ownerName"></span></p>
+            <h5>Owner Name</h5>
+            <form onSubmit="App.setOwnerName(); return false;" role="form">
+            <div >
+                <input id="newOwnerName"  type="text"></input>
+            </div>
+            <button type="submit" >Set</button>
+            </form>
+
+            <div id="contractDetails" style="display: none;">
             <p id="setContract">--- Contract Details: <span id="name"></span></p>
             <p>Name: <span id="ownerName"></span></p>
             <p>Mobile Number: <span id="mobileNumber"></span></p>
@@ -53,12 +62,11 @@
             <p>End Date: <span id="endDate"></span></p>
             <p>Supplied Services: <span id="suppliedServices"></span></p>
             <p>Pets Allowed: <span id="petsAllowed"></span></p>
-
+        </div>  
 
             <!-- tring out -->
-
             <p id="setContract">--- Fill in Contract Details --- <span id="name"></span></p>
-            <form onSubmit="App.setDetails(); return false;" role="form"></form>
+            <form onSubmit="App.setDetails(); return false;" role="form">
             Name: <input type="text" name="lname" id="setOwnerName" value="JL"><BR>
             Mobile Number: <input type="text" name="lname1" id="setMobileNumber" value="045333"><BR>
             Property Address: <input type="text" name="lname2" id="setPropertyAddress" value="Brisbane"><BR>
