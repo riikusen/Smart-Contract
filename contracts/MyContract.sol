@@ -36,8 +36,9 @@ contract MyContract {
     }
 
     // 本函数设置值状态变量的值。可见性设置为public，以便外部帐户可以访问它。
-    function set(string memory _value) public {
+    function set(string memory _value, string memory _ownerName) public {
         value = _value;
+        ownerName = _ownerName;
     }
 
 
@@ -53,9 +54,9 @@ contract MyContract {
         return ownerName;	
     }
 
-    function setOwnerName(string memory _ownerName) public {
-        ownerName = _ownerName;
-    }
+    // function setOwnerName(string memory _ownerName) public {
+    //     ownerName = _ownerName;
+    // }
 
     function getPropertyAddress() public view returns (string memory) {
         return peropertyAddress;	

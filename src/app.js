@@ -66,6 +66,7 @@ App = {
         // 设置当前区块链帐户
         const accounts = await ethereum.enable()
         App.account = accounts[0]
+        App.account2 = accounts[1]
         $('#account').html(App.account)
 
         // 加载智能合约
@@ -76,11 +77,11 @@ App = {
         const mobileNumber = await contract.getMobileNumber()
         const ownerName = await contract.getOwnerName()
         console.log(value);
-        console.log(mobileNumber);
+        console.log(mobileNumber.toString());
         console.log(ownerName);
         $('#value').html(value)
         $('#ownerName').html(ownerName);
-        // $('#mobileNumber').html(mobileNumber)
+        $('#mobileNumber').html(mobileNumber.toString());
 
         App.setLoading(false)
     },
@@ -92,9 +93,11 @@ App = {
         const newMobileNumber = $('#newMobileNumber').val()
         const newOwnerName = $('#newOwnerName').val()
 
-        await App.contractInstance.set(newValue, {from: App.account})
-        await App.contractInstance.setMobileNumber(newMobileNumber, {from: App.account})
-        await App.contractInstance.setOwnerName(newOwnerName, {from: App.account})
+        await App.contractInstance.set(newValue,newOwnerName, {from: App.account});
+        await App.contractInstance.setMobileNumber(newMobileNumber, {from: App.account});
+        
+        // await App.contractInstance.methods.setOwnerName(newOwnerName).send({from: App.account2});
+        // await App.contractInstance.setOwnerName(newOwnerName, {from: App.account2})
         window.alert('Successfully updated. Please refresh the page to view details.')
         App.setLoading(false)
     },

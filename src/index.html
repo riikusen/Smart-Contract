@@ -23,33 +23,17 @@
 
 
 
-          <p>Display the details: <span id="value"></span></p>
+          <p>Display the details: <span id="value"></span> <span id="ownerName"></span> <span id="mobileNumber"></span></p>
             <h5>Name</h5>
             <form onSubmit="App.set(); return false;" role="form">
             <div >
                 <input id="newValue"  type="text"></input>
-            </div>
-            <button type="submit" >Set</button>
-            </form>
-            
-
-            <p>Display the details: <span id="mobileNumber"></span></p>
-            <h5>Mobile Number</h5>
-            <form onSubmit="App.setMobileNumber(); return false;" role="form">
-            <div >
+                <input id="newOwnerName"  type="text"></input>
                 <input id="newMobileNumber"  type="text"></input>
             </div>
             <button type="submit" >Set</button>
             </form>
-
-            <p>Display the details: <span id="ownerName"></span></p>
-            <h5>Owner Name</h5>
-            <form onSubmit="App.setOwnerName(); return false;" role="form">
-            <div >
-                <input id="newOwnerName"  type="text"></input>
-            </div>
-            <button type="submit" >Set</button>
-            </form>
+            
 
             <div id="contractDetails" style="display: none;">
             <p id="setContract">--- Contract Details: <span id="name"></span></p>
