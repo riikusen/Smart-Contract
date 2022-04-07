@@ -6,32 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> Landlord Page</title>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
   <body>
       <h1>Landlord Page</h1>
       <a href="index.html">Go to the tenant page</a>
-      <!-- <h1>Account Number: <span id="account"></span></h1> -->
       <hr>
       <div id="content">
           <h2>Please fill the following details to start a rental contract.</b></h2>
 
 
 
-          <p>Display the details: <span id="value"></span> <span id="ownerName"></span> <span id="mobileNumber"></span></p>
+          <p>Display the details: <span id="ownerName"></span> <span id="mobileNumber"></span>
+        <span id="propertyAddress"></span> <span id="weeklyRent"></span><span id="deposit"></span> <span id="startDate"></span>
+        <span id="endDate"></span> <span id="suppliedServices"></span> <span id="petsAllowed"></span>
+        </p>
             <h5>Name</h5>
             <form onSubmit="App.set(); return false;" role="form">
             <div >
-                <input id="newValue"  type="text"></input>
-                <input id="newOwnerName"  type="text"></input>
-                <input id="newMobileNumber"  type="text"></input>
+                Name: <input id="newOwnerName"  type="text"> <br>
+                Mobile Number: <input id="newMobileNumber"  type="text"> <br>
+                Property Address: <input id="newPropertyAddress"  type="text"><br>
+                Weekly Rent: <input id="newWeeklyRent" type="text"> <br>
+                Deposit: <input id="newDeposit" type="text"> <br>
+                Start Date: <input id="newStartDate" type="text"> <br>
+                End Date: <input id="newEndDate" type="text"> <br>
+                Supplied Services: <input id="newSuppliedServices" type="text"> <br>
+                Pets Allowed: <input id="newPetsAllowed" type="text"> <br>
+                <input type="checkbox" id="myCheck">
+                 <label for="myCheck">I hereby declare that the information provided is true and correct. I also understand that any willful dishonesty may render for refusal of this application or immediate termination of contract.</label>
+
+           
             </div>
-            <button type="submit" >Set</button>
+            <button type="submit" >Sign the Contract</button>
             </form>
             
 
@@ -47,37 +53,7 @@
             <p>Supplied Services: <span id="suppliedServices"></span></p>
             <p>Pets Allowed: <span id="petsAllowed"></span></p>
         </div>  
-
-            <!-- tring out -->
-            <p id="setContract">--- Fill in Contract Details --- <span id="name"></span></p>
-            <form onSubmit="App.setDetails(); return false;" role="form">
-            Name: <input type="text" name="lname" id="setOwnerName" value="JL"><BR>
-            Mobile Number: <input type="text" name="lname1" id="setMobileNumber" value="045333"><BR>
-            Property Address: <input type="text" name="lname2" id="setPropertyAddress" value="Brisbane"><BR>
-            Weekly Rent: <input type="text" name="lname3" id="setWeeklyRent" value="200"><BR>
-            Deposit: <input type="text" name="lname4" id="setDeposit" value="400"><BR>
-            Start Date (DD/MM/YYYY): <input type="text" name="lname5" id="setStartDate" value="020422"><BR>
-            End Date (DD/MM/YYYY): <input type="text" name="lname6" id="setEndDate" value="090823"><BR>
-            Supplied Services: <input type="text" name="lname7" id="setSuppliedSerivces" value="water"><BR>
-            Pets Allowed: <input type="text" name="lname7" id="setPetsAllowed" value="false"><BR>
-            
-
-            <input type="checkbox" id="myCheck">
-            <label for="myCheck">I hereby declare that the information provided is true and correct. I also understand that any willful dishonesty may render for refusal of this application or immediate termination of contract.</label>
-            <br><button type="submit">Sign the contract</button>
-            </form>
             <p id="setVal">---</p>
-
-           
-
-
-            <!-- <h5>Payment Method</h5>
-            <form onSubmit="App.set(); return false;" role="form">
-            <div >
-                <input id="newValue"  type="text"></input>
-            </div> -->
-            <!-- <button type="submit" >Set</button>
-            </form> -->
 
       </div>
       <div id="loader">Refresh the page to view the contract details.</div>
@@ -85,7 +61,6 @@
 
     </div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://etherscan.io/jss/web3.min.js"></script>

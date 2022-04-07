@@ -73,15 +73,29 @@ App = {
         const contract = await App.contracts.MyContract.deployed()
         App.contractInstance = contract
         console.log(contract);
-        const value = await contract.get()
+        // const value = await contract.get()
         const mobileNumber = await contract.getMobileNumber()
         const ownerName = await contract.getOwnerName()
-        console.log(value);
-        console.log(mobileNumber.toString());
+        const propertyAddress = await contract.getPropertyAddress()
+        const weeklyRent = await contract.getWeeklyRent()
+        const deposit = await contract.getDeposit()
+        const startDate = await contract.getStartDate()
+        const endDade = await contract.getEndDate()
+        const suppliedServices = await contract.getSuppliedServices()
+        const petsAllowed = await contract.getPetsAllowed()
+        // console.log(value);
+        console.log(mobileNumber);
         console.log(ownerName);
-        $('#value').html(value)
+        // $('#value').html(value)
         $('#ownerName').html(ownerName);
-        $('#mobileNumber').html(mobileNumber.toString());
+        $('#mobileNumber').html(mobileNumber);
+        $('#propertyAddress').html(propertyAddress);
+        $('#weeklyRent').html(weeklyRent);
+        $('#deposit').html(deposit);
+        $('#startDate').html(startDate);
+        $('#endDate').html(endDade);
+        $('#suppliedServices').html(suppliedServices);
+        $('#petsAllowed').html(petsAllowed);
 
         App.setLoading(false)
     },
@@ -89,15 +103,18 @@ App = {
     set: async () => {
         App.setLoading(true)
 
-        const newValue = $('#newValue').val()
+        // const newValue = $('#newValue').val()
         const newMobileNumber = $('#newMobileNumber').val()
         const newOwnerName = $('#newOwnerName').val()
+        const newPropertyAddress = $('#newPropertyAddress').val()
+        const newWeeklyRent = $('#newWeeklyRent').val()
+        const newDeposit = $('#newDeposit').val()
+        const newStartDate = $('#newStartDate').val()
+        const newEndDate = $('#newEndDate').val()
+        const newSuppliedServices = $('#newSuppliedServices').val()
+        const newPetsAllowed = $('#newPetsAllowed').val()
 
-        await App.contractInstance.set(newValue,newOwnerName, {from: App.account});
-        await App.contractInstance.setMobileNumber(newMobileNumber, {from: App.account});
-        
-        // await App.contractInstance.methods.setOwnerName(newOwnerName).send({from: App.account2});
-        // await App.contractInstance.setOwnerName(newOwnerName, {from: App.account2})
+        await App.contractInstance.set(newOwnerName, newMobileNumber, newPropertyAddress, newWeeklyRent, newDeposit, newStartDate, newEndDate, newSuppliedServices, newPetsAllowed, {from: App.account});
         window.alert('Successfully updated. Please refresh the page to view details.')
         App.setLoading(false)
     },

@@ -5,17 +5,17 @@ pragma solidity ^0.8.10;
 contract MyContract {
 
     // 声明一个名为value的状态变量
-    string value;
-    int mobileNumber;
+    // string value;
+    string mobileNumber;
     // string ownerName;
     string ownerName;
-    string peropertyAddress;
-    int weeklyRent;
-    int deposit;
-    int startDate;
-    int endDate;
+    string propertyAddress;
+    string weeklyRent;
+    string deposit;
+    string startDate;
+    string endDate;
     string suppliedServices;
-    bool petsAllowed;
+    string petsAllowed;
     
 
 
@@ -23,68 +23,65 @@ contract MyContract {
     // 此函数具有public函数修饰符，以确保它对公共接口可用。
     // 在这个函数中，我们将公共变量value的值设置为“myValue”。
     constructor() {
-        value = "myValue";
+        // value = "myValue";
         ownerName = "Ren";
-        mobileNumber = 123;
         
     }
 
     // 本函数读取值状态变量的值。可见性设置为public，以便外部帐户可以访问它。
     // 它还包含view修饰符并指定一个字符串返回值。
-    function get() public view returns(string memory ) {
-        return value;
-    }
+    // function get() public view returns(string memory) {
+    //     return value;
+    // }
 
     // 本函数设置值状态变量的值。可见性设置为public，以便外部帐户可以访问它。
-    function set(string memory _value, string memory _ownerName) public {
-        value = _value;
+    function set(string memory _ownerName, string memory _mobileNumber, string memory _propertyAddress, string memory _weeklyRent, string memory _deposit, string memory _startDate,
+                string memory _endDate, string memory _suppliedServices, string memory _petsAllowed) public {
         ownerName = _ownerName;
+        mobileNumber = _mobileNumber;
+        propertyAddress = _propertyAddress;
+        weeklyRent = _weeklyRent;
+        deposit = _deposit;
+        startDate = _startDate;
+        endDate = _endDate;
+        suppliedServices = _suppliedServices;
+        petsAllowed = _petsAllowed;
     }
 
 
-    function getMobileNumber() public view returns(int) {
+    function getMobileNumber() public view returns(string memory) {
         return mobileNumber;
     }
 
-    function setMobileNumber(int _mobileNumber) public {
-        mobileNumber = _mobileNumber;
-    }
 
     function getOwnerName() public view returns (string memory) {
         return ownerName;	
     }
 
-    // function setOwnerName(string memory _ownerName) public {
-    //     ownerName = _ownerName;
-    // }
 
     function getPropertyAddress() public view returns (string memory) {
-        return peropertyAddress;	
+        return propertyAddress;	
     }
     
-    function getWeeklyRent() public view returns(int) {
+    function getWeeklyRent() public view returns(string memory) {
         return weeklyRent;
     }
-    function getDeposit() public view returns(int) {
+    function getDeposit() public view returns(string memory) {
         return deposit;
     }
-    function getStartDate() public view returns(int) {
+    function getStartDate() public view returns(string memory) {
         return startDate;
     }
-        function getEndDate() public view returns(int) {
+        function getEndDate() public view returns(string memory) {
         return endDate;
     }
 
-    // function setDetails(string memory setOwnerName, int setMobileNumber, string memory setPropertyAddress, int setWeeklyRent, int setDeposit, uint setStartDate, uint setEndDate, string memory setSuppliedServices, bool setPetsAllowed) public payable {
-    //     ownerName = setOwnerName;
-    //     mobileNumber = setMobileNumber;
-    //     peropertyAddress = setPropertyAddress;
-    //     weeklyRent = setWeeklyRent;
-    //     deposit = setDeposit;
-    //     startDate = setStartDate;
-    //     endDate = setEndDate;
-    //     suppliedServices = setSuppliedServices;
-    //     petsAllowed = setPetsAllowed;
+    function getSuppliedServices() public view returns (string memory) {
+        return suppliedServices;
+    }
 
-    // }
+    function getPetsAllowed() public view returns (string memory) {
+        return petsAllowed;
+    }
+
 }
