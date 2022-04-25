@@ -9,18 +9,19 @@
   </head>
   <body>
       <h1>Landlord Page</h1>
-      <a href="index.html">Go to the tenant page</a>
+      <h2>Current Account: <span id="account"></span></h2>
+   
+      <a href="tenant.html">Go to the tenant page</a>
       <hr>
       <div id="content">
           <h2>Please fill the following details to start a rental contract.</b></h2>
 
 
 
-          <p>Display the details: <span id="ownerName"></span> <span id="mobileNumber"></span>
+          <!-- <p>Display the details: <span id="ownerName"></span> <span id="mobileNumber"></span>
         <span id="propertyAddress"></span> <span id="weeklyRent"></span><span id="deposit"></span> <span id="startDate"></span>
         <span id="endDate"></span> <span id="suppliedServices"></span> <span id="petsAllowed"></span>
-        </p>
-            <h5>Name</h5>
+        </p> -->
             <form onSubmit="App.set(); return false;" role="form">
             <div >
                 Name: <input id="newOwnerName"  type="text"> <br>
@@ -41,8 +42,9 @@
             </form>
             
 
-            <div id="contractDetails" style="display: none;">
-            <p id="setContract">--- Contract Details: <span id="name"></span></p>
+            <p id="setVal">---</p>
+
+            <h4 id="setContract">--- View your contract details here. If you wish to edit your contract, please re-fill the form above. Notice that you will need enough Ether to edit contract details. ---</h4>
             <p>Name: <span id="ownerName"></span></p>
             <p>Mobile Number: <span id="mobileNumber"></span></p>
             <p>Address: <span id="propertyAddress"></span></p>
@@ -52,7 +54,7 @@
             <p>End Date: <span id="endDate"></span></p>
             <p>Supplied Services: <span id="suppliedServices"></span></p>
             <p>Pets Allowed: <span id="petsAllowed"></span></p>
-        </div>  
+
             <p id="setVal">---</p>
 
       </div>
