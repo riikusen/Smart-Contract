@@ -12,7 +12,6 @@ contract MyContract {
     string propertyAddress;
     string weeklyRent;
     string deposit;
-    // uint deposit;
     string startDate;
     string endDate;
     string suppliedServices;
@@ -30,36 +29,11 @@ contract MyContract {
     address payable landlordAddressPayable = payable(landlordAddress);
     address payable tenantAddressPayable = payable(tenantAddress);
 
-    
 
-
-    // 合约构造函数，每当将合约部署到网络时都会调用它。
-    // 此函数具有public函数修饰符，以确保它对公共接口可用。
-    // 在这个函数中，我们将公共变量value的值设置为“myValue”。
-    constructor() {
-        // value = "myValue";
-        ownerName = "Ren";
+    // constructor() {
+    //     // value = "myValue";
+    //     ownerName = "Ren";
         
-    }
-
-    // 本函数读取值状态变量的值。可见性设置为public，以便外部帐户可以访问它。
-    // 它还包含view修饰符并指定一个字符串返回值。
-    // function get() public view returns(string memory) {
-    //     return value;
-    // }
-    // Code example:
-    //  function st2num(string memory numString) public pure returns(uint) {
-    //     uint  val=0;
-    //     bytes   memory stringBytes = bytes(numString);
-    //     for (uint  i =  0; i<stringBytes.length; i++) {
-    //         uint exp = stringBytes.length - i;
-    //         bytes1 ival = stringBytes[i];
-    //         uint8 uval = uint8(ival);
-    //        uint jval = uval - uint(0x30);
-   
-    //        val +=  (uint(jval) * (10**(exp-1))); 
-    //     }
-    //   return val;
     // }
 
     function stringToUint(string memory s) public pure returns (uint result) {
@@ -74,7 +48,7 @@ contract MyContract {
             }
         }
     }
-    // 本函数设置值状态变量的值。可见性设置为public，以便外部帐户可以访问它。
+
     function set(string memory _ownerName, string memory _mobileNumber, string memory _propertyAddress, string memory _weeklyRent, string memory _deposit, string memory _startDate,
                 string memory _endDate, string memory _suppliedServices, string memory _petsAllowed) public {
         ownerName = _ownerName;
@@ -156,7 +130,7 @@ contract MyContract {
 
     function sendDeposit(address payable _receiver, uint amount) payable public {
         // msg.sender.transfer(msg.value);
-
+        
          _receiver.transfer(amount);
     }
 
@@ -178,6 +152,77 @@ contract MyContract {
         function getTenantBalance(address payable _tenantAddress) public view returns (uint) {
         return _tenantAddress.balance;
     }
+
+
+
+// testing 
+
+    function getBalance() public view returns(uint){
+        return address(this).balance;
+    }
+
+    function transferAmount(address payable _recipient, uint _amount) external payable {
+        _recipient.transfer(_amount);
+    }
+
+//     function send(address payable _receiver) external payable {
+//         require(msg.value == 0.5 ether);
+//         _receiver.send(msg.value);
+//   }
+    function blc() public view returns (uint256) {
+        uint balanceInEth = address(0xe31934c4161f87585DdBb2433645e7823F13b3dC).balance;
+        return balanceInEth;
+        // return 1.then(function(bn) { return bn.toString() });
+        
+    }
+
+    function blc2() public view returns (uint256) {
+        // uint balanceInEth = address(this).balance;
+        // return balanceInEth;
+        // return 1.then(function(bn) { return bn.toString() });
+        return 10**18;
+        
+    }
+
+    function blc3() public view returns (uint256) {
+        uint256 bl1 = blc();
+        uint256 bl2 = blc2();
+        uint256 sub = bl1 - bl2;
+        return sub;
+        
+    }
+
+    function blc4() public view returns (uint256) {
+        uint balanceInEth = address(this).balance;
+        return balanceInEth;
+        
+    }
+      uint num;
+  uint value;
+    
+  constructor() {
+      num = 69;
+      value = 0;
+  }
+  
+  event showNum(uint num);
+  event seeSender(address addy, uint value);
+
+  fallback() external payable {
+    emit seeSender(msg.sender, msg.value);
+    emit showNum(num);
+    num += 1;
+  }
+
+  function printNum() public returns (uint y){
+    emit showNum(num);
+    return num;
+  }
+
+  function printValue() public returns (uint y){
+    return value;
+  }
+
 
 
 

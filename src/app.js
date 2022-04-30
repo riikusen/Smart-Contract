@@ -98,6 +98,17 @@ App = {
         const tenantNumber = await contract.getTenantNumber()
         const tenantStartDate = await contract.getTenantStartDate()
         const tenantEndDate = await contract.getTenantEndDate()
+        
+        // web3.eth.sendTransaction({
+        //     from: '0x12f38F0d6069AF8cEE15B3EB046FB3Fa76413325',
+        //     to: contract.address,
+        //     value: 1000000000000000000,
+        // }).then( function(tx) { 
+        //     console.log("Transaction: ", tx); 
+        //     });
+
+
+        // })
         // console.log(value);
         console.log(mobileNumber);
         console.log(ownerName);
@@ -115,6 +126,7 @@ App = {
         $('#tenantNumber').html(tenantNumber);
         $('#tenantStartDate').html(tenantStartDate);
         $('#tenantEndDate').html(tenantEndDate);
+
 
         App.setLoading(false)
     },
@@ -143,6 +155,16 @@ App = {
 
         await App.contractInstance.set(newOwnerName, newMobileNumber, newPropertyAddress, newWeeklyRent, newDeposit, newStartDate, newEndDate, newSuppliedServices, newPetsAllowed, {from: App.account});
         // await App.contractInstance.setTenant(newTenantName, newTenantNumber, newTenantStartDate, newTenantEndDate, {from: tenantAccount});
+        const contract = await App.contracts.MyContract.deployed()
+        web3.eth.sendTransaction({
+            from: '0x12f38F0d6069AF8cEE15B3EB046FB3Fa76413325',
+            to: contract.address,
+            value: parseInt(newDeposit)*10**18,
+        }, function(err, transactionHash) {
+            if (!err)
+                console.log(transactionHash + "Deposite Received"); 
+            });
+        
         window.alert('Successfully updated. Please refresh the page to view details.')
         App.setLoading(false)
     },
