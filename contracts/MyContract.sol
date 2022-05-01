@@ -1,11 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.10;
 
-// 声明智能合约MyContract，合约的所有代码都包含在花括号中。
+
 contract MyContract {
 
-    // 声明一个名为value的状态变量
-    // string value;
     string mobileNumber;
     // string ownerName;
     string ownerName;
@@ -24,17 +22,19 @@ contract MyContract {
 
     // string landlordAddress;
     // string tenantAddress;
-    address landlordAddress = 0x12f38F0d6069AF8cEE15B3EB046FB3Fa76413325;
-    address tenantAddress = 0xe31934c4161f87585DdBb2433645e7823F13b3dC;
+    address landlordAddress = 0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c;  // ********************** edit this
+    address tenantAddress = 0xdF5d173d48cE72d3AF0AB5c614BF7e25B36Af6a6; // ************************ edit this 
     address payable landlordAddressPayable = payable(landlordAddress);
     address payable tenantAddressPayable = payable(tenantAddress);
 
 
-    // constructor() {
-    //     // value = "myValue";
-    //     ownerName = "Ren";
+    constructor() {
+        // value = "myValue";
+        ownerName = "Ren";
+        deposit = "1";
         
-    // }
+    }
+    fallback() external payable {}
 
     function stringToUint(string memory s) public pure returns (uint result) {
         bytes memory b = bytes(s);
@@ -68,9 +68,9 @@ contract MyContract {
         tenantStartDate = newStart;
         tenantEndDate = newEnd;
         //call send deposit here 
-        string memory depositSet = getDeposit();
-        uint depositUint = stringToUint(depositSet);
-        sendDeposit(landlordAddressPayable, depositUint);
+        // string memory depositSet = getDeposit();
+        // uint depositUint = stringToUint(depositSet);
+        // sendDeposit(landlordAddressPayable, depositUint);
     }
 
 
@@ -128,28 +128,20 @@ contract MyContract {
         uint256 public balance;
 
 
+
+// Tenant functions
+
+    // function () public payable {}
+
     function sendDeposit(address payable _receiver, uint amount) payable public {
-        // msg.sender.transfer(msg.value);
-        
          _receiver.transfer(amount);
-    }
-
-    function returnDeposit(address payable _sender, uint amount) payable public {
-        _sender.transfer(amount);
-    }
-
-
-
-    function payDeposit(uint256 amount) payable public {
-        require(msg.value == amount);
-        // nothing else to do!
     }
 
     function getLandlordBalance(address payable _landlordAddress) public view returns (uint) {
         return _landlordAddress.balance;
     }
 
-        function getTenantBalance(address payable _tenantAddress) public view returns (uint) {
+    function getTenantBalance(address payable _tenantAddress) public view returns (uint) {
         return _tenantAddress.balance;
     }
 
@@ -165,63 +157,14 @@ contract MyContract {
         _recipient.transfer(_amount);
     }
 
-//     function send(address payable _receiver) external payable {
-//         require(msg.value == 0.5 ether);
-//         _receiver.send(msg.value);
+
+
+//   fallback() external payable {
+//     emit seeSender(msg.sender, msg.value);
+//     emit showNum(num);
+//     num += 1;
 //   }
-    function blc() public view returns (uint256) {
-        uint balanceInEth = address(0xe31934c4161f87585DdBb2433645e7823F13b3dC).balance;
-        return balanceInEth;
-        // return 1.then(function(bn) { return bn.toString() });
-        
-    }
 
-    function blc2() public view returns (uint256) {
-        // uint balanceInEth = address(this).balance;
-        // return balanceInEth;
-        // return 1.then(function(bn) { return bn.toString() });
-        return 10**18;
-        
-    }
-
-    function blc3() public view returns (uint256) {
-        uint256 bl1 = blc();
-        uint256 bl2 = blc2();
-        uint256 sub = bl1 - bl2;
-        return sub;
-        
-    }
-
-    function blc4() public view returns (uint256) {
-        uint balanceInEth = address(this).balance;
-        return balanceInEth;
-        
-    }
-      uint num;
-  uint value;
-    
-  constructor() {
-      num = 69;
-      value = 0;
-  }
-  
-  event showNum(uint num);
-  event seeSender(address addy, uint value);
-
-  fallback() external payable {
-    emit seeSender(msg.sender, msg.value);
-    emit showNum(num);
-    num += 1;
-  }
-
-  function printNum() public returns (uint y){
-    emit showNum(num);
-    return num;
-  }
-
-  function printValue() public returns (uint y){
-    return value;
-  }
 
 
 

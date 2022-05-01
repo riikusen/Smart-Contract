@@ -6,19 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> Tenant Page</title>
 
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
   <body>
       <h1>Tenant Page</h1>
       <h2>Current Account: <span id="account2"></span></h2>
       <a href="index.html">Go to the landlord page</a>
-      <!-- <h1>Account Number: <span id="account"></span></h1> -->
       <hr>
       <div id="content">
           <h2>Please fill the following details to start a rental contract.</b></h2>
@@ -33,15 +25,18 @@
                   <input type="checkbox" id="myCheck">
                   <label for="myCheck">I hereby declare that the information provided is true and correct. I also understand that any willful dishonesty may render for refusal of this application or immediate termination of contract.</label>
               </div>
-              <button type="submit" >Pay the deposit and start the contract</button>
+              <button type="submit" >Pay the deposit and start the lease</button>
               </form>
 
             <p id="setVal">---</p>
-            <h4 id="setContract">--- View your contract details here. If you wish to edit your contract, please re-fill the form above. Notice that you will need enough Ether to edit contract details. ---</h4>
+            <h4 id="setTenant">--- View your contract details here. If you wish to edit your contract, please re-fill the form above. Notice that you will need enough Ether to edit contract details. ---</h4>
             <p>Name: <span id="tenantName"></span></p>
             <p>Mobile Number: <span id="tenantNumber"></span></p>
             <p>Start Date: <span id="tenantStartDate"></span></p>
             <p>End Date: <span id="tenantEndDate"></span></p>
+            <p id="setVal">---</p>
+            <button type="submit" >Start to pay the rent</button> <br>
+            <button type="submit" >End the lease</button>
             <p id="setVal">---</p>
       </div>
       <div id="loader">Loading...</div>

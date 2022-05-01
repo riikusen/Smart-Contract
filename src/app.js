@@ -24,28 +24,27 @@ App = {
         } else {
             window.alert("Please connect to Metamask.")
         }
-        // MetaMask新版本…
+
         if (window.ethereum) {
             window.web3 = new Web3(ethereum)
             try {
-                // 向用户请求帐户访问
+       
                 await ethereum.enable()
-                // 用户允许使用账户
+               
                 web3.eth.sendTransaction({/* ... */ })
             } catch (error) {
-                // 用户拒绝使用账户
+
             }
         }
-        // MetaMask老版本…
         else if (window.web3) {
             App.web3Provider = web3.currentProvider
             window.web3 = new Web3(web3.currentProvider)
-            // 无需向用户请求，可以直接使用账号
+
             web3.eth.sendTransaction({/* ... */ })
         }
-        // 没有安装以太坊钱包插件(MetaMask)...
+
         else {
-            console.log('需要安装以太坊钱包插件(例如MetaMask)才能使用!')
+            console.log('Please connect to Metamask')
         }
     },
 
@@ -68,23 +67,21 @@ App = {
         const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
         // const accounts = await ethereum.enable()
         console.log(accounts);
-        const tenantAccount = '0x4355A350071d1352F647250808DcAe1850ceA72B';
+        const tenantAccount = '0xdF5d173d48cE72d3AF0AB5c614BF7e25B36Af6a6';
         App.account = accounts[0];
-        const landlordAccount = '0xe31934c4161f87585DdBb2433645e7823F13b3dC';
+        const landlordAccount = '0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c';
         $('#account').html(landlordAccount)
         console.log(tenantAccount);
         console.log(landlordAccount);
-        // console.log(tenantAccount);
         $('#account2').html(tenantAccount)
 
         // 加载智能合约
         const contract = await App.contracts.MyContract.deployed()
         console.log(App);
-        // const tenantContract = await App.contracts.TenantContract.deployed()
         App.contractInstance = contract
-        // console.log(tenantContract);
+
         console.log(contract);
-        // const value = await contract.get()
+
         const mobileNumber = await contract.getMobileNumber()
         const ownerName = await contract.getOwnerName()
         const propertyAddress = await contract.getPropertyAddress()
@@ -99,17 +96,6 @@ App = {
         const tenantStartDate = await contract.getTenantStartDate()
         const tenantEndDate = await contract.getTenantEndDate()
         
-        // web3.eth.sendTransaction({
-        //     from: '0x12f38F0d6069AF8cEE15B3EB046FB3Fa76413325',
-        //     to: contract.address,
-        //     value: 1000000000000000000,
-        // }).then( function(tx) { 
-        //     console.log("Transaction: ", tx); 
-        //     });
-
-
-        // })
-        // console.log(value);
         console.log(mobileNumber);
         console.log(ownerName);
         // $('#value').html(value)
@@ -136,8 +122,6 @@ App = {
         console.log(App.contractInstance);
         App.setLoading(true)
 
-        // const newValue = $('#newValue').val()
-        // const landlordAccount = '0x12f38F0d6069AF8cEE15B3EB046FB3Fa76413325';
         const newMobileNumber = $('#newMobileNumber').val()
         const newOwnerName = $('#newOwnerName').val()
         const newPropertyAddress = $('#newPropertyAddress').val()
@@ -148,36 +132,36 @@ App = {
         const newSuppliedServices = $('#newSuppliedServices').val()
         const newPetsAllowed = $('#newPetsAllowed').val()
 
-        // const newTenantName = $('#newTenantName').val()
-        // const newTenantNumber = $('#newTenantNumber').val()
-        // const newTenantStartDate = $('#newTenantStartDate').val()
-        // const newTenantEndDate = $('newTenantEndDate').val()
-
-        await App.contractInstance.set(newOwnerName, newMobileNumber, newPropertyAddress, newWeeklyRent, newDeposit, newStartDate, newEndDate, newSuppliedServices, newPetsAllowed, {from: App.account});
-        // await App.contractInstance.setTenant(newTenantName, newTenantNumber, newTenantStartDate, newTenantEndDate, {from: tenantAccount});
-        const contract = await App.contracts.MyContract.deployed()
-        web3.eth.sendTransaction({
-            from: '0x12f38F0d6069AF8cEE15B3EB046FB3Fa76413325',
-            to: contract.address,
-            value: parseInt(newDeposit)*10**18,
-        }, function(err, transactionHash) {
-            if (!err)
-                console.log(transactionHash + "Deposite Received"); 
-            });
+        await App.contractInstance.set(newOwnerName, newMobileNumber, newPropertyAddress, newWeeklyRent, newDeposit, newStartDate, newEndDate, newSuppliedServices, newPetsAllowed, {from: '0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c'});
+        
         
         window.alert('Successfully updated. Please refresh the page to view details.')
         App.setLoading(false)
     },
 
     setTenant: async () => {
+        
+        console.log(App.contractInstance);
         App.setLoading(true)
+        const contract = await App.contracts.MyContract.deployed()
         const newTenantName = $('#newTenantName').val()
         const newTenantNumber = $('#newTenantNumber').val()
         const newTenantStartDate = $('#newTenantStartDate').val()
-        const newTenantEndDate = $('newTenantEndDate').val()
-        console.log(App.contractInstance);
-        // const tenantAccount = '0xe31934c4161f87585DdBb2433645e7823F13b3dC';
-        await App.contractInstance.setTenant(newTenantName, newTenantNumber, newTenantStartDate, newTenantEndDate, {from: App.account});
+        const newTenantEndDate = $('#newTenantEndDate').val()
+        const depositeToPay = await contract.getDeposit();
+
+        console.log(parseInt(depositeToPay), newTenantName, newTenantNumber, newTenantStartDate, newTenantEndDate);
+        console.log(contract.address);
+        await App.contractInstance.setTenant(newTenantName, newTenantNumber, newTenantStartDate, newTenantEndDate, {from: '0xdF5d173d48cE72d3AF0AB5c614BF7e25B36Af6a6'});
+        web3.eth.sendTransaction({
+            from: '0xdF5d173d48cE72d3AF0AB5c614BF7e25B36Af6a6', // ********************** Edit this ******************* Tenant
+            to: contract.address,
+            value: parseInt(depositeToPay)*10**18,
+            gas: 100000
+        }, function(err, transactionHash) {
+            if (!err)
+                console.log(transactionHash + "Deposite Received"); 
+            });
         window.alert('Successfully updated. Please refresh the page to view details.')
         App.setLoading(false)
     },
@@ -196,25 +180,9 @@ App = {
     }
 }
 
-// function showContractDetails() {
-//     var x = document.getElementById("contractDetails");
-//     if (x.style.display == "none") {
-//         x.style.display == "block";
-//     }
-// }
 
 $(document).ready(function () {
     App.init()
 });
 
-// console.log(111);
 
-
-// function myFunction() {
-//     var x = document.getElementById("myDIV");
-//     if (x.style.display === "none") {
-//       x.style.display = "block";
-//     } else {
-//       x.style.display = "none";
-//     }
-//   }
