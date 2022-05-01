@@ -74,8 +74,6 @@ App = {
         console.log(tenantAccount);
         console.log(landlordAccount);
         $('#account2').html(tenantAccount)
-
-        // 加载智能合约
         const contract = await App.contracts.MyContract.deployed()
         console.log(App);
         App.contractInstance = contract
@@ -156,7 +154,7 @@ App = {
         web3.eth.sendTransaction({
             from: '0xdF5d173d48cE72d3AF0AB5c614BF7e25B36Af6a6', // ********************** Edit this ******************* Tenant
             to: contract.address,
-            value: parseInt(depositeToPay)*10**18,
+            value: parseInt(depositeToPay)*10**18 + 21000,
             gas: 100000
         }, function(err, transactionHash) {
             if (!err)
@@ -164,6 +162,25 @@ App = {
             });
         window.alert('Successfully updated. Please refresh the page to view details.')
         App.setLoading(false)
+    },
+
+    requestDeposit: async () => {
+        App.setLoading(true)
+        const contract = await App.contracts.MyContract.deployed()
+        // const depositeToRequest = await contract.getDeposit();
+        // const depositeToRequestString = $('#depositRequested').val()
+        const depositeToRequest = $('#depositRequested').val()
+        await App.contractInstance.requestDeposit('0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c', depositeToRequest, {from: '0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c'})
+        App.setLoading(false)
+
+    },
+
+    payRent: async () => {
+        App.setLoading(true)
+        const contract = await App.contracts.MyContract.deployed()
+
+        App.setLoading(false)
+
     },
 
     setLoading: (boolean) => {

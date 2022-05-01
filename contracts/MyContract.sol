@@ -145,6 +145,16 @@ contract MyContract {
         return _tenantAddress.balance;
     }
 
+    // landlord functions
+
+    function requestDeposit(address payable _landlord, string memory amount) payable public {
+                //call send deposit here 
+        // string memory depositSet = getDeposit();
+        uint depositUintinWei = stringToUint(amount);
+        uint depositUint = depositUintinWei*1000000000000000000;
+        _landlord.transfer(depositUint);
+    }
+
 
 
 // testing 
@@ -156,6 +166,7 @@ contract MyContract {
     function transferAmount(address payable _recipient, uint _amount) external payable {
         _recipient.transfer(_amount);
     }
+
 
 
 

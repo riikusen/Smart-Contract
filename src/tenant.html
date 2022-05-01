@@ -20,8 +20,8 @@
               <div >
                   Name: <input id="newTenantName"  type="text"> <br>
                   Mobile Number: <input id="newTenantNumber"  type="text"> <br>
-                  Start Date: <input id="newTenantStartDate" type="text"> <br>
-                  End Date: <input id="newTenantEndDate" type="text"> <br>
+                  Start Date (dd/mm/yyyy): <input id="newTenantStartDate" type="text"> <br>
+                  End Date (dd/mm/yyyy): <input id="newTenantEndDate" type="text"> <br>
                   <input type="checkbox" id="myCheck">
                   <label for="myCheck">I hereby declare that the information provided is true and correct. I also understand that any willful dishonesty may render for refusal of this application or immediate termination of contract.</label>
               </div>
@@ -35,7 +35,8 @@
             <p>Start Date: <span id="tenantStartDate"></span></p>
             <p>End Date: <span id="tenantEndDate"></span></p>
             <p id="setVal">---</p>
-            <button type="submit" >Start to pay the rent</button> <br>
+
+            <button onclick="App.payRent()" >Request</button> <br><br>
             <button type="submit" >End the lease</button>
             <p id="setVal">---</p>
       </div>

@@ -21,10 +21,10 @@
                 Name: <input id="newOwnerName"  type="text"> <br>
                 Mobile Number: <input id="newMobileNumber"  type="text"> <br>
                 Property Address: <input id="newPropertyAddress"  type="text"><br>
-                Weekly Rent: <input id="newWeeklyRent" type="text"> <br>
-                Deposit: <input id="newDeposit" type="text"> <br>
-                Start Date: <input id="newStartDate" type="text"> <br>
-                End Date: <input id="newEndDate" type="text"> <br>
+                Weekly Rent (in ETH): <input id="newWeeklyRent" type="text"> <br>
+                Deposit (in ETH): <input id="newDeposit" type="text"> <br>
+                Start Date (dd/mm/yyyy): <input id="newStartDate" type="text"> <br>
+                End Date (dd/mm/yyyy) (optional): <input id="newEndDate" type="text"> <br>
                 Supplied Services: <input id="newSuppliedServices" type="text"> <br>
                 Pets Allowed: <input id="newPetsAllowed" type="text"> <br>
                 <input type="checkbox" id="myCheck">
@@ -49,10 +49,16 @@
             <p>Supplied Services: <span id="suppliedServices"></span></p>
             <p>Pets Allowed: <span id="petsAllowed"></span></p>
 
-            <button type="submit" >Request the Deposit</button> <br>
-            <button type="submit" >End the lease</button>
+            <p id="setVal">---</p>
+
+            <!-- <p>Request the Deposit: <span id="depositRequested"></span></p> -->
+            Request the Deposit: <input id="depositRequested"  type="text"> <br>
+            <button onclick="App.requestDeposit()" >Request</button> <br>
+            <br> <button type="submit" >End the lease</button>
 
             <p id="setVal">---</p>
+
+
 
       </div>
       <div id="loader">Refresh the page to view the contract details.</div>
