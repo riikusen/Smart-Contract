@@ -6,6 +6,7 @@ App = {
     loading: false,
     contractInstance: null,
 
+
     init: async () => {
         await App.loadWeb3()
         await App.loadContract()
@@ -51,6 +52,9 @@ App = {
     },
 
     render: async () => {
+        const tenantAccount = '0xdF5d173d48cE72d3AF0AB5c614BF7e25B36Af6a6';
+        const landlordAccount = '0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c';
+        
 
         if (App.loading) {
             return
@@ -61,9 +65,10 @@ App = {
         const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
         // const accounts = await ethereum.enable()
         console.log(accounts);
-        const tenantAccount = '0xdF5d173d48cE72d3AF0AB5c614BF7e25B36Af6a6';
+        // const tenantAccount = '0xdF5d173d48cE72d3AF0AB5c614BF7e25B36Af6a6';
+        // const landlordAccount = '0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c';
         App.account = accounts[0];
-        const landlordAccount = '0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c';
+        // const landlordAccount = '0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c';
         $('#account').html(landlordAccount)
         console.log(tenantAccount);
         console.log(landlordAccount);
@@ -111,6 +116,8 @@ App = {
     
 
     set: async () => {
+        const tenantAccount = '0xdF5d173d48cE72d3AF0AB5c614BF7e25B36Af6a6';
+        const landlordAccount = '0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c';
         console.log(App.contractInstance);
         App.setLoading(true)
 
@@ -124,7 +131,7 @@ App = {
         const newSuppliedServices = $('#newSuppliedServices').val()
         const newPetsAllowed = $('#newPetsAllowed').val()
 
-        await App.contractInstance.set(newOwnerName, newMobileNumber, newPropertyAddress, newWeeklyRent, newDeposit, newStartDate, newEndDate, newSuppliedServices, newPetsAllowed, {from: '0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c'});
+        await App.contractInstance.set(newOwnerName, newMobileNumber, newPropertyAddress, newWeeklyRent, newDeposit, newStartDate, newEndDate, newSuppliedServices, newPetsAllowed, {from: landlordAccount});
         
         
         window.alert('Successfully updated. Please refresh the page to view details.')
@@ -133,6 +140,8 @@ App = {
 
     setTenant: async () => {
         
+        const tenantAccount = '0xdF5d173d48cE72d3AF0AB5c614BF7e25B36Af6a6';
+        const landlordAccount = '0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c';
         console.log(App.contractInstance);
         App.setLoading(true)
         const contract = await App.contracts.MyContract.deployed()
@@ -144,9 +153,9 @@ App = {
 
         console.log(parseInt(depositeToPay), newTenantName, newTenantNumber, newTenantStartDate, newTenantEndDate);
         console.log(contract.address);
-        await App.contractInstance.setTenant(newTenantName, newTenantNumber, newTenantStartDate, newTenantEndDate, {from: '0xdF5d173d48cE72d3AF0AB5c614BF7e25B36Af6a6'});
+        await App.contractInstance.setTenant(newTenantName, newTenantNumber, newTenantStartDate, newTenantEndDate, {from: tenantAccount}); 
         web3.eth.sendTransaction({
-            from: '0xdF5d173d48cE72d3AF0AB5c614BF7e25B36Af6a6', // ********************** Edit this ******************* Tenant
+            from: tenantAccount, // ********************** Edit this ******************* Tenant
             to: contract.address,
             value: parseInt(depositeToPay)*10**18 + 21000,
             gas: 100000
@@ -159,20 +168,24 @@ App = {
     },
 
     requestDeposit: async () => {
+        const tenantAccount = '0xdF5d173d48cE72d3AF0AB5c614BF7e25B36Af6a6';
+        const landlordAccount = '0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c';
         App.setLoading(true)
         const contract = await App.contracts.MyContract.deployed()
         const depositToRequest = $('#depositRequested').val()
-        await contract.requestDeposit('0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c', depositToRequest, {from: '0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c'})
+        await contract.requestDeposit(landlordAccount, depositToRequest, {from: landlordAccount})
         App.setLoading(false)
     },
 
     payRent: async () => {
+        const tenantAccount = '0xdF5d173d48cE72d3AF0AB5c614BF7e25B36Af6a6';
+        const landlordAccount = '0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c';
         App.setLoading(true)
         const contract = await App.contracts.MyContract.deployed()
         const rent = await contract.getWeeklyRent();
         console.log(rent);
         web3.eth.sendTransaction({
-            from: '0xdF5d173d48cE72d3AF0AB5c614BF7e25B36Af6a6', // ********************** Edit this ******************* Tenant
+            from: tenantAccount, // ********************** Edit this ******************* Tenant
             to: contract.address,
             value: parseInt(rent)*10**18 + 21000,
             gas: 100000
@@ -184,9 +197,44 @@ App = {
     },
 
     receiveRent: async () => {
+        const tenantAccount = '0xdF5d173d48cE72d3AF0AB5c614BF7e25B36Af6a6';
+        const landlordAccount = '0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c';
         App.setLoading(true)
         const contract = await App.contracts.MyContract.deployed()
-        await contract.receiveRent('0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c', {from: '0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c'});
+        const balance = await contract.getBalance();
+        console.log(balance);
+        await contract.receiveRent(landlordAccount, {from: landlordAccount})
+        App.setLoading(false)
+    },
+
+    landlordEndLease: async () => {
+        const tenantAccount = '0xdF5d173d48cE72d3AF0AB5c614BF7e25B36Af6a6';
+        const landlordAccount = '0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c';
+        App.setLoading(true)
+        window.alert('You will have to pay the tenant the same amount as the deposit to end the lease early.')
+        const contract = await App.contracts.MyContract.deployed()
+        const landlordFine = await contract.getDeposit();
+        web3.eth.sendTransaction({
+            from: landlordAccount, // ********************** Edit this ******************* Tenant
+            to: contract.address,
+            value: parseInt(landlordFine)*10**18 + 21000,
+            gas: 100000
+        }, function(err, transactionHash) {
+            if (!err)
+                console.log(transactionHash + "Deposite Received"); 
+            });
+        await contract.endLease(tenantAccount, landlordFine, {from: landlordAccount})
+         App.setLoading(false)
+    },
+
+    tenantEndLease: async () => {
+        const tenantAccount = '0xdF5d173d48cE72d3AF0AB5c614BF7e25B36Af6a6';
+        const landlordAccount = '0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c';
+        App.setLoading(true)
+        window.alert('Your deposit will be paid to the landlord if you wish to end the lease early.')
+        const contract = await App.contracts.MyContract.deployed()
+        const depositToRequest = await contract.getDeposit();
+        await contract.requestDeposit(landlordAccount, depositToRequest, {from: tenantAccount})
         App.setLoading(false)
     },
 

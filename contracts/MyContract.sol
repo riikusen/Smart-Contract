@@ -167,6 +167,13 @@ contract MyContract {
         _landlord.transfer(rentToCollect);
     }
 
+
+    function endLease(address payable _receiver, string memory amount) payable public {
+        uint depositUintinWei = stringToUint(amount);
+        uint depositUint = depositUintinWei*1000000000000000000;
+        _receiver.transfer(depositUint);
+    }
+
     
 
 
