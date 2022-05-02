@@ -7,16 +7,12 @@ App = {
     contractInstance: null,
 
     init: async () => {
-        // 加载web3
         await App.loadWeb3()
-        // 加载智能合约
         await App.loadContract()
-        // 网页刷新
         await App.render()
     },
 
-    
-    // https://medium.com/metamask/https-medium-com-metamask-breaking-change-injecting-web3-7722797916a8
+
     loadWeb3: async () => {
         if (typeof web3 !== 'undefined') {
             App.web3Provider = web3.currentProvider
@@ -55,15 +51,13 @@ App = {
     },
 
     render: async () => {
-        // 如果正在加载，直接返回，避免重复操作
+
         if (App.loading) {
             return
         }
 
-        // 更新app加载状态
         App.setLoading(true)
 
-        // 设置当前区块链帐户
         const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
         // const accounts = await ethereum.enable()
         console.log(accounts);
@@ -167,20 +161,33 @@ App = {
     requestDeposit: async () => {
         App.setLoading(true)
         const contract = await App.contracts.MyContract.deployed()
-        // const depositeToRequest = await contract.getDeposit();
-        // const depositeToRequestString = $('#depositRequested').val()
-        const depositeToRequest = $('#depositRequested').val()
-        await App.contractInstance.requestDeposit('0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c', depositeToRequest, {from: '0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c'})
+        const depositToRequest = $('#depositRequested').val()
+        await contract.requestDeposit('0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c', depositToRequest, {from: '0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c'})
         App.setLoading(false)
-
     },
 
     payRent: async () => {
         App.setLoading(true)
         const contract = await App.contracts.MyContract.deployed()
+        const rent = await contract.getWeeklyRent();
+        console.log(rent);
+        web3.eth.sendTransaction({
+            from: '0xdF5d173d48cE72d3AF0AB5c614BF7e25B36Af6a6', // ********************** Edit this ******************* Tenant
+            to: contract.address,
+            value: parseInt(rent)*10**18 + 21000,
+            gas: 100000
+        }, function(err, transactionHash) {
+            if (!err)
+                console.log(transactionHash + "Deposite Received"); 
+            });
+         App.setLoading(false)
+    },
 
+    receiveRent: async () => {
+        App.setLoading(true)
+        const contract = await App.contracts.MyContract.deployed()
+        await contract.receiveRent('0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c', {from: '0x31248Ef67b5a5AFd0623B54dBfA467901818Fc2c'});
         App.setLoading(false)
-
     },
 
     setLoading: (boolean) => {

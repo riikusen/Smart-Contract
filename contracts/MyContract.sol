@@ -35,6 +35,9 @@ contract MyContract {
         
     }
     fallback() external payable {}
+    receive() external payable {
+        // custom function code
+    }
 
     function stringToUint(string memory s) public pure returns (uint result) {
         bytes memory b = bytes(s);
@@ -155,6 +158,17 @@ contract MyContract {
         _landlord.transfer(depositUint);
     }
 
+    function receiveRent(address payable _landlord) payable public {
+        uint balanceInContract = getBalance();
+        string memory depositInContract = getDeposit();
+
+        uint rentToCollect = balanceInContract - stringToUint(depositInContract)*1000000000000000000;
+        // uint rentUint = rentToCollect*1000000000000000000;
+        _landlord.transfer(rentToCollect);
+    }
+
+    
+
 
 
 // testing 
@@ -163,9 +177,14 @@ contract MyContract {
         return address(this).balance;
     }
 
-    function transferAmount(address payable _recipient, uint _amount) external payable {
-        _recipient.transfer(_amount);
+    function rr() public view returns(uint) {
+        uint balanceInContract = getBalance();
+        string memory depositInContract = getDeposit();
+        uint rentToCollect = balanceInContract - stringToUint(depositInContract)*1000000000000000000;
+        return rentToCollect;
     }
+
+
 
 
 
